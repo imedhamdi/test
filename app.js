@@ -3,7 +3,8 @@ const path = require('path');
 const mysql = require('mysql');
 const router = require('express').Router();
 var bodyParser = require('body-parser');
-const { log } = require('console');
+
+
 
 const app = express();
 
@@ -14,19 +15,18 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use(express.static('images'));
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+// app.use(bodyParser.urlencoded({
+//     extended: false
+// }));
 
-console.log("hello");
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/index.html'));
+
+router.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname+'index.html'));
   });
 
 // const dbConn = mysql.createConnection({
