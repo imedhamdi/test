@@ -26,38 +26,38 @@ app.use(bodyParser.urlencoded({
 
 console.log("hello");
 
-const dbConn = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: ""
-});
+// const dbConn = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: ""
+// });
 
-dbConn.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!"); {
-        dbConn.query("CREATE DATABASE IF NOT EXISTS Groupomania", function (err, result) {
-            if (err) throw err;
-        })
-        dbConn.query("CREATE TABLE IF NOT EXISTS Groupomania.customers  (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255))", function (err, result) {
-            if (err) throw err;
-            console.log(result);
-        });
-    };
-});
-app.post('/', function (req, res) {
-    var user = req.body;
-    dbConn.query("USE Groupomania");
-    dbConn.query("INSERT INTO customers set ?", user, function (err, result) {
+// dbConn.connect(function (err) {
+//     if (err) throw err;
+//     console.log("Connected!"); {
+//         dbConn.query("CREATE DATABASE IF NOT EXISTS Groupomania", function (err, result) {
+//             if (err) throw err;
+//         })
+//         dbConn.query("CREATE TABLE IF NOT EXISTS Groupomania.customers  (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255))", function (err, result) {
+//             if (err) throw err;
+//             console.log(result);
+//         });
+//     };
+// });
+// app.post('/', function (req, res) {
+//     var user = req.body;
+//     dbConn.query("USE Groupomania");
+//     dbConn.query("INSERT INTO customers set ?", user, function (err, result) {
 
-        if (err) {
-            console.log(err);
-        } else {
-            res.send({
-                "code": 200,
-                "success": "L'utilisateur a été ajouté ! "
-            });
-        }
-    });
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             res.send({
+//                 "code": 200,
+//                 "success": "L'utilisateur a été ajouté ! "
+//             });
+//         }
+//     });
 
-});
+// });
 module.exports = app;
