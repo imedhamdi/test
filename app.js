@@ -25,6 +25,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 console.log("hello");
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, '/index.html'));
+  });
 
 // const dbConn = mysql.createConnection({
 //     host: "localhost",
