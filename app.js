@@ -3,6 +3,7 @@ const path = require('path');
 const mysql = require('mysql');
 const router = require('express').Router();
 var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 
 
@@ -20,47 +21,17 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({
-//     extended: false
-// }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 
-router.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname+'index.html'));
-  });
+mongoose.connect(`mongodb+srv://imedhamdi007:P8ozs8vTwKyoEmrr@api-nodejs.lpnpgx4.mongodb.net/`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-// const dbConn = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: ""
-// });
-
-// dbConn.connect(function (err) {
-//     if (err) throw err;
-//     console.log("Connected!"); {
-//         dbConn.query("CREATE DATABASE IF NOT EXISTS Groupomania", function (err, result) {
-//             if (err) throw err;
-//         })
-//         dbConn.query("CREATE TABLE IF NOT EXISTS Groupomania.customers  (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255))", function (err, result) {
-//             if (err) throw err;
-//             console.log(result);
-//         });
-//     };
-// });
-// app.post('/', function (req, res) {
-//     var user = req.body;
-//     dbConn.query("USE Groupomania");
-//     dbConn.query("INSERT INTO customers set ?", user, function (err, result) {
-
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             res.send({
-//                 "code": 200,
-//                 "success": "L'utilisateur a été ajouté ! "
-//             });
-//         }
-//     });
-
-// });
 module.exports = app;
